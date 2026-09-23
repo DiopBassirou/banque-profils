@@ -19,6 +19,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        \Illuminate\Support\Facades\RateLimiter::for('magic-link', function (\Illuminate\Http\Request $request) {
+            return \Illuminate\Cache\RateLimiting\Limit::perMinute(100)->by($request->ip());
+        });
+
+        \Illuminate\Support\Facades\RateLimiter::for('profils-store', function (\Illuminate\Http\Request $request) {
+            return \Illuminate\Cache\RateLimiting\Limit::perMinute(100)->by($request->ip());
+        });
     }
 }

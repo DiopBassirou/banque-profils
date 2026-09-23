@@ -12,7 +12,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'magic_link' => \App\Http\Middleware\MagicLinkAuth::class,
+        ]);
+        
+        // Configuration de Sanctum pour l'API (nécessaire pour Stateful SPA Admin)
+        $middleware->statefulApi();
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
