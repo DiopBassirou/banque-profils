@@ -1,0 +1,40 @@
+<div class="login-page">
+  <div class="login-container">
+    <div class="login-header">
+      <svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" class="logo">
+        <rect x="0" y="0" width="10" height="20" fill="#00853F"/>
+        <rect x="10" y="0" width="10" height="20" fill="#FDEF42"/>
+        <rect x="20" y="0" width="10" height="20" fill="#E31B23"/>
+        <path d="M15 6L16.1 9.4L19.7 9.4L16.8 11.5L17.9 14.9L15 12.8L12.1 14.9L13.2 11.5L10.3 9.4L13.9 9.4Z" fill="#00853F"/>
+      </svg>
+      <h1>Administration</h1>
+      <p>Connectez-vous pour modérer les profils.</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Adresse Email</label>
+        <input type="email" id="email" formControlName="email" class="form-control" placeholder="admin@banqueprofils.sn">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" formControlName="password" class="form-control" placeholder="••••••••">
+      </div>
+
+      @if (errorMessage) {
+        <div class="alert-error">
+          <i class="fa-solid fa-triangle-exclamation"></i> {{ errorMessage }}
+        </div>
+      }
+
+      <button type="submit" class="btn btn-primary btn-submit" [disabled]="loading || loginForm.invalid">
+        @if (loading) {
+          <i class="fa-solid fa-spinner fa-spin"></i> Connexion...
+        } @else {
+          Se connecter
+        }
+      </button>
+    </form>
+  </div>
+</div>

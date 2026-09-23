@@ -1,0 +1,91 @@
+<div class="admin-layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" class="logo">
+        <rect x="0" y="0" width="10" height="20" fill="#00853F"/>
+        <rect x="10" y="0" width="10" height="20" fill="#FDEF42"/>
+        <rect x="20" y="0" width="10" height="20" fill="#E31B23"/>
+        <path d="M15 6L16.1 9.4L19.7 9.4L16.8 11.5L17.9 14.9L15 12.8L12.1 14.9L13.2 11.5L10.3 9.4L13.9 9.4Z" fill="#00853F"/>
+      </svg>
+      <h2>Admin Panel</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="active"><i class="fa-solid fa-users"></i> Gestion des profils</a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn btn-secondary" (click)="logout()">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Déconnexion
+      </button>
+    </div>
+  </aside>
+
+  <main class="admin-content">
+    <div class="content-header">
+      <h1>Tous les profils</h1>
+    </div>
+
+    @if (loading) {
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Chargement des profils...</p>
+      </div>
+    } @else {
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Candidat</th>
+              <th>Contact</th>
+              <th>Recherche</th>
+              <th>Statut</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (p of profils; track p.id) {
+              <tr>
+                <td>
+                  <strong>{{ p.nom_affiche }}</strong><br>
+                  <small>{{ p.domaine }} - {{ p.niveau }}</small>
+                </td>
+                <td>
+                  @if (p.email_contact) { <div><i class="fa-solid fa-envelope"></i> {{ p.email_contact }}</div> }
+                  @if (p.whatsapp) { <div><i class="fa-brands fa-whatsapp"></i> {{ p.whatsapp }}</div> }
+                </td>
+                <td>
+                  <span class="badge">{{ p.type_recherche }}</span>
+                </td>
+                <td>
+                  <span class="status-badge" [class]="'status-' + p.status">
+                    {{ p.status }}
+                  </span>
+                </td>
+                <td>{{ p.created_at | date:'dd/MM/yyyy' }}</td>
+                <td class="actions-cell">
+                  @if (p.status !== 'publie') {
+                    <button class="btn-icon text-success" title="Publier" (click)="updateStatus(p.id, 'publie')">
+                      <i class="fa-solid fa-check"></i>
+                    </button>
+                  }
+                  @if (p.status !== 'rejete') {
+                    <button class="btn-icon text-warning" title="Rejeter" (click)="updateStatus(p.id, 'rejete')">
+                      <i class="fa-solid fa-ban"></i>
+                    </button>
+                  }
+                  <button class="btn-icon text-danger" title="Supprimer" (click)="deleteProfil(p.id)">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="6" class="text-center">Aucun profil trouvé.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </main>
+</div>

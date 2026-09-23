@@ -1,0 +1,50 @@
+<div class="decouvrir-page">
+
+  <div class="page-hero">
+    <h1>Découvrir les profils</h1>
+    <p>Trouvez les meilleurs talents pour votre entreprise.</p>
+  </div>
+
+  <div class="profils-grid">
+    @if (loading) {
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Chargement des profils...</p>
+      </div>
+    }
+    @if (!loading) {
+      @for (profil of profils; track profil.id) {
+        <div class="profil-card">
+          <div class="card-top">
+            <h2>{{ profil.nom_affiche }}</h2>
+            <ul class="card-details">
+              <li><i class="fa-solid fa-graduation-cap"></i> Diplômé(e) en <strong>{{ profil.niveau }}</strong></li>
+              <li><i class="fa-solid fa-magnifying-glass"></i> Recherche : <strong>{{ profil.type_recherche }}</strong></li>
+              <li><i class="fa-solid fa-briefcase"></i> {{ profil.domaine }}</li>
+              <li><i class="fa-solid fa-location-dot"></i> {{ profil.region }}</li>
+            </ul>
+          </div>
+          <p class="card-desc">{{ profil.description }}</p>
+          <div class="card-actions">
+            @if (profil.email_contact) {
+              <a [href]="'https://mail.google.com/mail/?view=cm&fs=1&to=' + profil.email_contact + '&su=Contact via Banque de Profils'" target="_blank" rel="noopener" class="action-link email">
+                <i class="fa-solid fa-envelope"></i> Email
+              </a>
+            }
+            @if (profil.whatsapp) {
+              <a [href]="'https://wa.me/' + profil.whatsapp + '?text=Bonjour, j\'ai vu votre profil sur Banque de Profils.'" target="_blank" rel="noopener" class="action-link whatsapp">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+              </a>
+            }
+          </div>
+        </div>
+      } @empty {
+        <div class="empty-state">
+          <i class="fa-solid fa-users-slash"></i>
+          <h3>Aucun profil disponible</h3>
+          <p>Soyez le premier à publier votre profil !</p>
+        </div>
+      }
+    }
+  </div>
+</div>

@@ -1,1 +1,224 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;600;700&family=Work+Sans:wght@400;500;600&display=swap');
+
+:root {
+  /* Couleurs Principales — Cahier des Charges */
+  --pine: #0B4A34;
+  --gold: #C89B3C;
+  --clay: #A23B2E;
+  --paper: #FBF8F1;
+  --paper-light: #F5F0E6;
+  --line: #E8E0D0;
+
+  /* Aliases pour compatibilité */
+  --color-primary: var(--pine);
+  --color-secondary: var(--gold);
+  --color-accent: var(--clay);
+  --color-bg: var(--paper);
+  --color-text: #2D2A26;
+  --color-text-light: #6B6560;
+  --color-white: #FFFFFF;
+
+  /* Typographie */
+  --font-heading: 'Fraunces', serif;
+  --font-body: 'Work Sans', sans-serif;
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  background-color: var(--paper);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--pine);
+  margin-top: 0;
+}
+
+a {
+  color: var(--pine);
+  text-decoration: none;
+}
+
+/* Focus global — Accessibilité (or) */
+*:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ========== BOUTONS ========== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--pine);
+  color: var(--color-white);
+}
+.btn-primary:hover {
+  background-color: #083827;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(11, 74, 52, 0.3);
+}
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background-color: #25D366;
+  color: var(--color-white);
+  font-weight: 600;
+}
+.btn-secondary:hover {
+  background-color: #1EBE5A;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.btn-accent {
+  background-color: var(--clay);
+  color: var(--color-white);
+}
+.btn-accent:hover {
+  background-color: #8a3227;
+}
+
+/* ========== CHIPS (remplacement des <select>) ========== */
+.chips-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  border: 2px solid var(--line);
+  background: var(--color-white);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.chip:hover {
+  border-color: var(--gold);
+  background: rgba(200, 155, 60, 0.08);
+}
+.chip.active {
+  background: var(--gold);
+  color: #2D2A26;
+  border-color: var(--gold);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(200, 155, 60, 0.3);
+}
+
+/* ========== SECTIONS DE FORMULAIRE ========== */
+.form-section {
+  background: var(--color-white);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 0.75rem 0.75rem 0;
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.form-section-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--pine);
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.form-section-title i {
+  color: var(--gold);
+}
+.form-section-subtitle {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  margin-bottom: 1.25rem;
+}
+
+/* ========== SUCCESS CARD ========== */
+.success-card {
+  text-align: center;
+  background: var(--color-white);
+  border: 2px solid var(--gold);
+  border-radius: 1rem;
+  padding: 3rem 2rem;
+  box-shadow: 0 8px 24px rgba(200, 155, 60, 0.15);
+}
+.success-card h2 {
+  color: var(--pine);
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+.success-card .icon-success {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #D4A843);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+.success-card .icon-success i {
+  font-size: 2rem;
+  color: white;
+}
+
+/* ========== ALERT ERROR ========== */
+.alert-error {
+  background-color: #FEF2F2;
+  border-left: 4px solid var(--clay);
+  color: #991B1B;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* ========== SÉPARATEUR OR ========== */
+.gold-separator {
+  border: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  margin: 2rem 0;
+}
+
+/* ========== UTILITAIRES ========== */
+.text-primary { color: var(--pine); }
+.text-secondary { color: var(--gold); }
+.text-accent { color: var(--clay); }
+.text-text-light { color: var(--color-text-light); }

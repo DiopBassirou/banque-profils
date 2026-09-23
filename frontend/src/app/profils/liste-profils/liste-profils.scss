@@ -1,0 +1,151 @@
+/* ========== HERO ========== */
+.page-hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.page-hero h1 {
+  font-size: 2rem;
+  color: var(--pine);
+  margin-bottom: 0.25rem;
+}
+.page-hero p {
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+}
+
+/* ========== LOADING ========== */
+.loading-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  grid-column: 1 / -1;
+  color: var(--color-text-light);
+}
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--line);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 1rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ========== GRID ========== */
+.profils-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+/* ========== CARD ========== */
+.profil-card {
+  background: var(--color-white);
+  border-radius: 0.6rem;
+  border-left: 3px solid var(--gold);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  padding: 1.25rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.profil-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+/* Nom */
+.card-top h2 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  color: var(--pine);
+  margin: 0 0 0.75rem 0;
+}
+
+/* Liste descriptive */
+.card-details {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.card-details li {
+  font-size: 0.82rem;
+  color: var(--color-text-light);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.card-details li i {
+  color: var(--gold);
+  width: 14px;
+  text-align: center;
+  font-size: 0.75rem;
+}
+.card-details li strong {
+  color: var(--color-text);
+}
+
+/* Description */
+.card-desc {
+  font-size: 0.82rem;
+  color: var(--color-text-light);
+  line-height: 1.55;
+  margin: 0.85rem 0 0;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--line);
+  flex-grow: 1;
+}
+
+/* Actions — petits liens discrets */
+.card-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+}
+.action-link {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.35rem;
+  transition: all 0.2s;
+}
+.action-link.email {
+  color: var(--pine);
+  background: rgba(11, 74, 52, 0.08);
+}
+.action-link.email:hover {
+  background: rgba(11, 74, 52, 0.15);
+}
+.action-link.whatsapp {
+  color: #128C7E;
+  background: rgba(37, 211, 102, 0.1);
+}
+.action-link.whatsapp:hover {
+  background: rgba(37, 211, 102, 0.2);
+}
+
+/* ========== EMPTY STATE ========== */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  grid-column: 1 / -1;
+  color: var(--color-text-light);
+}
+.empty-state i {
+  font-size: 2rem;
+  color: var(--line);
+  margin-bottom: 1rem;
+}
+.empty-state h3 {
+  color: var(--color-text-light);
+  margin-bottom: 0.25rem;
+}

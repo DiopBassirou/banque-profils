@@ -1,0 +1,51 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: banque-profils-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: banque_profils
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_USER: banqueprofils_user
+      MYSQL_PASSWORD: secret
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - bp-network
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: banque-profils-api
+    restart: unless-stopped
+    volumes:
+      - ./backend:/var/www/html
+    networks:
+      - bp-network
+    depends_on:
+      - db
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: banque-profils-web
+    restart: unless-stopped
+    ports:
+      - "3002:80" # Port 3002 (Host) -> Port 80 (Container)
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      # On monte aussi le backend pour que Nginx puisse trouver les fichiers statiques de Laravel si besoin
+      - ./backend:/var/www/html 
+    networks:
+      - bp-network
+    depends_on:
+      - api
+
+networks:
+  bp-network:
+    driver: bridge
+
+volumes:
+  db-data:

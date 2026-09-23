@@ -1,0 +1,165 @@
+<div class="publier-page">
+
+  <div class="page-hero">
+    <h1>Publier un Profil</h1>
+    <p>Rendez-vous visible auprès des recruteurs en quelques clics.</p>
+  </div>
+
+  <div class="form-container">
+    @if (successMessage) {
+      <div class="success-card">
+        <div class="icon-success">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <h2>Félicitations !</h2>
+        <p style="font-size: 1.1rem; color: var(--color-text);">Votre profil est maintenant <strong>en ligne</strong> !</p>
+        <p class="text-text-light">Il est immédiatement visible par tous les recruteurs.</p>
+        <hr class="gold-separator" style="max-width: 120px; margin: 1.5rem auto;">
+        <p style="font-size: 0.85rem; color: var(--color-text-light);">
+          <i class="fa-solid fa-arrow-right" style="color: var(--gold); margin-right: 0.4rem;"></i>
+          Redirection vers l'accueil dans quelques secondes...
+        </p>
+      </div>
+    } @else {
+      <form [formGroup]="profilForm" (ngSubmit)="onSubmit()">
+
+        <!-- SECTION 1 : Informations du profil -->
+        <div class="form-section">
+          <h3 class="form-section-title">
+            <i class="fa-solid fa-user-pen"></i> Informations du profil
+          </h3>
+          <p class="form-section-subtitle">Ces informations seront affichées publiquement.</p>
+          
+          <div class="form-group">
+            <label for="nom_affiche">Nom ou pseudo affiché <span class="required">*</span></label>
+            <input type="text" id="nom_affiche" formControlName="nom_affiche" class="form-control" placeholder="Ex: Jean Dupont">
+            @if (submitted && profilForm.get('nom_affiche')?.errors?.['required']) {
+              <small class="error-text">Ce champ est requis.</small>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Niveau d'études <span class="required">*</span></label>
+            <div class="chips-group">
+              @for (n of niveaux; track n) {
+                <button type="button" class="chip" [class.active]="profilForm.get('niveau')?.value === n" (click)="setNiveau(n)">
+                  {{ n }}
+                </button>
+              }
+            </div>
+            @if (submitted && profilForm.get('niveau')?.errors?.['required']) {
+              <small class="error-text">Sélectionnez votre niveau d'études.</small>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Type de recherche <span class="required">*</span></label>
+            <p class="form-section-subtitle" style="margin-bottom: 0.5rem; margin-top: 0;">Vous pouvez en sélectionner plusieurs.</p>
+            <div class="chips-group">
+              @for (t of typesRecherche; track t) {
+                <button type="button" class="chip" [class.active]="isTypeSelected(t)" (click)="toggleTypeRecherche(t)">
+                  @if (isTypeSelected(t)) {
+                    <i class="fa-solid fa-check" style="margin-right: 0.3rem; font-size: 0.75rem;"></i>
+                  }
+                  {{ t }}
+                </button>
+              }
+            </div>
+            @if (submitted && profilForm.get('type_recherche')?.errors?.['required']) {
+              <small class="error-text">Sélectionnez au moins un type de recherche.</small>
+            }
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="domaine">Domaine <span class="required">*</span></label>
+              <input type="text" id="domaine" formControlName="domaine" class="form-control" placeholder="Ex: Marketing Digital">
+              @if (submitted && profilForm.get('domaine')?.errors?.['required']) {
+                <small class="error-text">Ce champ est requis.</small>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="region">Région <span class="required">*</span></label>
+              <input type="text" id="region" formControlName="region" class="form-control" placeholder="Ex: Dakar">
+              @if (submitted && profilForm.get('region')?.errors?.['required']) {
+                <small class="error-text">Ce champ est requis.</small>
+              }
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Présentez-vous <span class="required">*</span></label>
+            <textarea id="description" formControlName="description" class="form-control" rows="5" placeholder="Décrivez votre parcours, vos compétences, vos objectifs..."></textarea>
+            @if (submitted && profilForm.get('description')?.errors?.['required']) {
+              <small class="error-text">Ce champ est requis (10 caractères minimum).</small>
+            }
+          </div>
+        </div>
+
+        <!-- SECTION 2 : Moyens de contact -->
+        <div class="form-section">
+          <h3 class="form-section-title">
+            <i class="fa-solid fa-address-book"></i> Moyens de contact
+          </h3>
+          <p class="form-section-subtitle">Remplissez au moins un des deux. Ces informations seront visibles publiquement.</p>
+
+          @if (submitted && profilForm.errors?.['contactRequired']) {
+            <div class="alert-error">
+              <i class="fa-solid fa-triangle-exclamation" style="margin-right: 0.5rem;"></i>
+              Vous devez fournir au moins un email de contact ou un numéro WhatsApp.
+            </div>
+          }
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email_contact">
+                <i class="fa-solid fa-envelope" style="color: var(--gold); margin-right: 0.4rem;"></i>
+                Email de contact
+              </label>
+              <input type="email" id="email_contact" formControlName="email_contact" class="form-control" placeholder="Ex: jean@email.com">
+            </div>
+
+            <div class="form-group">
+              <label for="whatsapp">
+                <i class="fa-brands fa-whatsapp" style="color: #25D366; margin-right: 0.4rem;"></i>
+                WhatsApp (format international)
+              </label>
+              <input type="text" id="whatsapp" formControlName="whatsapp" class="form-control" placeholder="Ex: 221771234567">
+            </div>
+          </div>
+        </div>
+
+        <!-- CONSENTEMENT -->
+        <div class="consent-section">
+          <div class="checkbox-group">
+            <input type="checkbox" id="consentement" formControlName="consentement">
+            <label for="consentement">Je consens à publier mes informations de contact publiquement <span class="required">*</span></label>
+          </div>
+          @if (submitted && profilForm.get('consentement')?.errors?.['required']) {
+            <small class="error-text">Le consentement est obligatoire.</small>
+          }
+        </div>
+
+        @if (errorMessage) {
+          <div class="alert-error" style="margin-top: 1.5rem; text-align: center;">
+            <i class="fa-solid fa-triangle-exclamation" style="margin-right: 0.5rem;"></i>
+            {{ errorMessage }}
+          </div>
+        }
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary btn-submit" [disabled]="loading">
+            @if (loading) {
+              <i class="fa-solid fa-spinner fa-spin" style="margin-right: 0.5rem;"></i>
+              Publication en cours...
+            } @else {
+              <i class="fa-solid fa-paper-plane" style="margin-right: 0.5rem;"></i>
+              Publier mon profil
+            }
+          </button>
+        </div>
+      </form>
+    }
+  </div>
+</div>
