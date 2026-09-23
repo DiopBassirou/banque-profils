@@ -86,7 +86,7 @@ export class PublierProfil {
         
         setTimeout(() => {
           this.router.navigate(['/']);
-        }, 5000);
+        }, 3000);
       },
       error: (err) => {
         console.error('Erreur', err);
