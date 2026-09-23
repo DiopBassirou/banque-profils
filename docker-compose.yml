@@ -4,10 +4,10 @@ services:
     container_name: banque-profils-db
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: banque_profils
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_USER: banqueprofils_user
-      MYSQL_PASSWORD: secret
+      MYSQL_DATABASE: ${DB_DATABASE:-banque_profils}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME:-banqueprofils_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - db-data:/var/lib/mysql
     networks:

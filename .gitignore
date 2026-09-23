@@ -1,5 +1,7 @@
 # Laravel
 backend/vendor/
+# Fichiers d'environnement (Sécurité)
+/.env
 backend/.env
 backend/storage/*.key
 backend/storage/logs/*
