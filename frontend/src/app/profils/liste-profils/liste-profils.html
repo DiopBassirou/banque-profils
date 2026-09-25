@@ -5,6 +5,27 @@
     <p>Trouvez les meilleurs talents pour votre entreprise.</p>
   </div>
 
+  <div class="search-container">
+    <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="search-form">
+      <div class="search-input-wrapper">
+        <input type="text" id="domaine" formControlName="domaine" class="search-input" placeholder="Ex: Marketing, Développeur Backend...">
+      </div>
+
+      <div class="search-select-wrapper">
+        <select id="type_recherche" formControlName="type_recherche" class="search-select">
+          <option value="">Tous contrats</option>
+          <option value="CDI">CDI</option>
+          <option value="CDD">CDD</option>
+          <option value="Stage">Stage</option>
+          <option value="Alternance">Alternance</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary search-btn">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
+  </div>
+
   <div class="profils-grid">
     @if (loading) {
       <div class="loading-state">

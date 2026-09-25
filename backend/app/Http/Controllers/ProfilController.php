@@ -17,9 +17,7 @@ class ProfilController extends Controller
         if ($request->filled('domaine')) {
             $query->where('domaine', 'like', '%' . $request->domaine . '%');
         }
-        if ($request->filled('region')) {
-            $query->where('region', $request->region);
-        }
+
 
         return response()->json($query->orderBy('created_at', 'desc')->paginate(12));
     }

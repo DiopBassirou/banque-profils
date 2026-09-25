@@ -1,27 +1,43 @@
 import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ProfilService, ProfilData } from '../../core/services/profil';
 
 @Component({
   selector: 'app-liste-profils',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './liste-profils.html',
   styleUrl: './liste-profils.scss'
 })
 export class ListeProfils implements OnInit {
   private profilService = inject(ProfilService);
   private cdr = inject(ChangeDetectorRef);
+  private fb = inject(FormBuilder);
   
   profils: ProfilData[] = [];
   loading = true;
+  searchForm: FormGroup;
 
-  constructor() {}
+  constructor() {
+    this.searchForm = this.fb.group({
+      domaine: [''],
+      type_recherche: ['']
+    });
+  }
 
   ngOnInit() {
     this.chargerProfils();
   }
 
-  chargerProfils() {
-    this.profilService.getProfils().subscribe({
+  onSearch() {
+    const values = this.searchForm.value;
+    // Retirer les valeurs vides
+    const filters = Object.fromEntries(Object.entries(values).filter(([_, v]) => v !== ''));
+    this.chargerProfils(filters);
+  }
+
+  chargerProfils(filters?: any) {
+    this.loading = true;
+    this.profilService.getProfils(filters).subscribe({
       next: (response) => {
         this.profils = response?.data ? response.data : (Array.isArray(response) ? response : []);
         this.loading = false;
