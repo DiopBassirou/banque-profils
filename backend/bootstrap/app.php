@@ -18,6 +18,11 @@ return Application::configure(basePath: dirname(__DIR__))
         
         // Configuration de Sanctum pour l'API (nécessaire pour Stateful SPA Admin)
         $middleware->statefulApi();
+
+        // Exclure la route publique de publication de profil de la vérification CSRF
+        $middleware->validateCsrfTokens(except: [
+            'api/profils',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
