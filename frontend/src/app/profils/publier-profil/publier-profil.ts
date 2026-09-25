@@ -19,6 +19,7 @@ export class PublierProfil {
   private router = inject(Router);
 
   niveaux = ['Bac', 'BTS', 'Licence', 'Master'];
+  experiences = ['Junior (0-2 ans)', 'Intermédiaire (3-5 ans)', 'Senior (5 ans et +)'];
   typesRecherche = ['Stage', 'CDD', 'CDI', 'Alternance'];
   selectedTypes: string[] = [];
 
@@ -26,8 +27,10 @@ export class PublierProfil {
     this.profilForm = this.fb.group({
       nom_affiche: ['', [Validators.required, Validators.minLength(2)]],
       niveau: ['', Validators.required],
+      experience: ['', Validators.required],
       type_recherche: ['', Validators.required],
       domaine: ['', Validators.required],
+      competences: [''], // Séparées par des virgules
       region: ['', Validators.required],
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
       email_contact: ['', Validators.email],
@@ -47,6 +50,10 @@ export class PublierProfil {
 
   setNiveau(val: string) {
     this.profilForm.patchValue({ niveau: val });
+  }
+
+  setExperience(val: string) {
+    this.profilForm.patchValue({ experience: val });
   }
 
   toggleTypeRecherche(val: string) {

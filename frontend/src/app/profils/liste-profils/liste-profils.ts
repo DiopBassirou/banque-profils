@@ -56,4 +56,10 @@ export class ListeProfils implements OnInit {
     if (!typeRecherche) return [];
     return typeRecherche.split(',').map(t => t.trim());
   }
+
+  // Sépare les compétences (ex: "Laravel, Vue, CSS" → ["Laravel", "Vue", "CSS"])
+  getCompetencesArray(competences?: string | null): string[] {
+    if (!competences) return [];
+    return competences.split(',').map(c => c.trim()).filter(c => c.length > 0);
+  }
 }

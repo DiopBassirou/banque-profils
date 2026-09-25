@@ -15,7 +15,7 @@
 
 /* ========== SEARCH BAR ========== */
 .search-container {
-  max-width: 800px;
+  max-width: 1000px;
   margin: -2.5rem auto 2rem;
   background: var(--color-white);
   padding: 0.75rem;
@@ -165,6 +165,7 @@
   color: var(--color-text-light);
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.45rem;
 }
 .card-details li i {
@@ -175,6 +176,32 @@
 }
 .card-details li strong {
   color: var(--color-text);
+}
+
+.exp-badge {
+  background: var(--gold);
+  color: var(--color-white);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-left: 0.2rem;
+}
+
+.competences-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+.competence-badge {
+  background: var(--paper-light);
+  color: var(--pine);
+  border: 1px solid rgba(11, 74, 52, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
 }
 
 /* Description */

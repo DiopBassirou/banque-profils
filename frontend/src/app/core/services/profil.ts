@@ -7,8 +7,10 @@ export interface ProfilData {
   id?: number;
   nom_affiche: string;
   niveau: string;
+  experience: string;
   type_recherche: string;
   domaine: string;
+  competences?: string | null;
   region: string;
   description: string;
   email_contact?: string | null;

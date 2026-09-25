@@ -39,11 +39,21 @@
           <div class="card-top">
             <h2>{{ profil.nom_affiche }}</h2>
             <ul class="card-details">
-              <li><i class="fa-solid fa-graduation-cap"></i> Diplômé(e) en <strong>{{ profil.niveau }}</strong></li>
+              <li><i class="fa-solid fa-graduation-cap"></i> <strong>{{ profil.niveau }}</strong></li>
+              <li><i class="fa-solid fa-briefcase"></i> {{ profil.domaine }} 
+                @if(profil.experience) { <span class="exp-badge">{{ profil.experience }}</span> }
+              </li>
               <li><i class="fa-solid fa-magnifying-glass"></i> Recherche : <strong>{{ profil.type_recherche }}</strong></li>
-              <li><i class="fa-solid fa-briefcase"></i> {{ profil.domaine }}</li>
               <li><i class="fa-solid fa-location-dot"></i> {{ profil.region }}</li>
             </ul>
+            
+            @if (profil.competences) {
+              <div class="competences-list">
+                @for (comp of getCompetencesArray(profil.competences); track comp) {
+                  <span class="competence-badge">{{ comp }}</span>
+                }
+              </div>
+            }
           </div>
           <p class="card-desc">{{ profil.description }}</p>
           <div class="card-actions">

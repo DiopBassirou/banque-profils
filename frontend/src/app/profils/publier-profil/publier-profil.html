@@ -52,6 +52,20 @@
           </div>
 
           <div class="form-group">
+            <label>Années d'expérience <span class="required">*</span></label>
+            <div class="chips-group">
+              @for (e of experiences; track e) {
+                <button type="button" class="chip" [class.active]="profilForm.get('experience')?.value === e" (click)="setExperience(e)">
+                  {{ e }}
+                </button>
+              }
+            </div>
+            @if (submitted && profilForm.get('experience')?.errors?.['required']) {
+              <small class="error-text">Sélectionnez vos années d'expérience.</small>
+            }
+          </div>
+
+          <div class="form-group">
             <label>Type de recherche <span class="required">*</span></label>
             <p class="form-section-subtitle" style="margin-bottom: 0.5rem; margin-top: 0;">Vous pouvez en sélectionner plusieurs.</p>
             <div class="chips-group">
@@ -85,6 +99,12 @@
                 <small class="error-text">Ce champ est requis.</small>
               }
             </div>
+          </div>
+
+          <div class="form-group">
+            <label for="competences">Compétences clés / Outils (Optionnel)</label>
+            <p class="form-section-subtitle" style="margin-bottom: 0.5rem; margin-top: 0;">Séparez-les par des virgules. Ex: Laravel, SEO, AutoCAD...</p>
+            <input type="text" id="competences" formControlName="competences" class="form-control" placeholder="Ex: React, Marketing Digital, Gestion de projet">
           </div>
 
           <div class="form-group">
