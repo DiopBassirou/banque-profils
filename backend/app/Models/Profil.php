@@ -11,7 +11,7 @@ class Profil extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'nom_affiche', 'niveau', 'type_recherche', 'domaine', 'region', 
+        'nom_affiche', 'niveau', 'experience', 'type_recherche', 'domaine', 'competences', 'region', 
         'description', 'email_contact', 'email_gestion', 'whatsapp', 
         'status', 'expires_at'
     ];

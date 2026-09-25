@@ -17,8 +17,13 @@ class ProfilController extends Controller
         if ($request->filled('domaine')) {
             $query->where('domaine', 'like', '%' . $request->domaine . '%');
         }
-
-
+        if ($request->filled('experience')) {
+            $query->where('experience', $request->experience);
+        }
+        if ($request->filled('competences')) {
+            // On peut chercher une compétence spécifique avec LIKE
+            $query->where('competences', 'like', '%' . $request->competences . '%');
+        }
         return response()->json($query->orderBy('created_at', 'desc')->paginate(12));
     }
 
@@ -37,6 +42,8 @@ class ProfilController extends Controller
                 }
             }],
             'domaine' => 'required|string|max:255',
+            'experience' => 'required|string|max:255',
+            'competences' => 'nullable|string|max:1000',
             'region' => 'required|string|max:255',
             'description' => 'required|string|min:10|max:1000',
             'email_contact' => 'nullable|email',
